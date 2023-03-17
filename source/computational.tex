@@ -1,0 +1,738 @@
+\documentclass[10pt,a4paper,draft,titlepage,onecolumn]{book}
+\usepackage[left=0.5in, top=1in, bottom=1in, right=0. 5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{index}
+\makeindex
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}[section]
+\newtheorem{property}{Property}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\author{Arvid Claassen}
+\date{March 2023}
+\title{Math for Computer Scientists}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter*{Preface}
+Welcome to the chapter to no one reads. So let me keep it short.
+What follows is my attempt to write a book to give you insight in several math topics.
+This book is free. And will grow over time.
+But feel free to buy me a coffee.
+
+
+\chapter{Fundamentals of Logic}
+\section{Core Operations and Properties}
+Logic is the core all mathematical and computational reasoning. The rules of logic specify the meaning of mathematical statements and how transform one into another. 
+In this chapter we'll formalize reasoning. \\
+Everything starts with a proposition, it is the most basic building block in logic.
+\begin{definition}[Proposition]
+A declarative sentence that is either True or False, but not both.
+\end{definition}
+Other sources my use the term \textit{statement} instead. Both areare interchangeable. \\ 
+Propositions are notated as lowercase letters. Here are some examples:
+\begin{itemize}
+ \item[p]: Beethoven wrote 9 symphonies. (True)
+ \item[q]: Einstein lived in Germany and the United States. (True)
+ \item[r]: $ 1 + 3 = 5 $ (False)
+\end{itemize}
+In order to confirm that propositions p and q are True, you probably have to check an historical source. For now we ask you to trust us.
+The addition in proposition r is clearly wrong, however it is a valid proposition with truth value False. \\
+Not every sentence is a proposition. None of the following statements is a proposition:
+\begin{itemize}
+ \item  Get out! (No truth value)
+ \item  2{$x$}+1=5 (Might be True or False, depending on the value of x)
+ \item  Such a nice flower. (No truth value)
+ \item  \textit{Goldbach’s Conjecture}: Every even positive integer greater than 2 is the sum of two prime numbers. (Unknown)
+\end{itemize}
+
+\begin{definition}[Primitive Proposition]
+A proposition that can be broken down into simpler propositions
+\end{definition}
+$p$ and $r$ are primitive propositions. However, $q$ can be broken down into $q_1$: Einstein lived in Germany and $q_2$: Einstein lived in the United States. \\
+
+In logic new propositions can be obtained from existing ones by applying operations: 
+\begin{definition}[Negation, Logical Complement] Negation is a unary operation that turns a proposition $p$ into to another proposition "not $p$", written {$\neg$}$p$. Not $p$ is the negation of $p$. Other textbook may use the term complement: not $p$ is the complement of $p$.
+\end{definition} 
+
+Intuitively, if p is true, then $\neg$p is False; and conversely, if $\neg$p is True, then p is False.
+The negation of a proposition is not primitive. 
+\begin{example}
+p: An ant is not a mammal. 
+p can be broken down into $\neg$ q with q: An ant is a mammal.
+\end{example}
+
+\begin{property}[Double negation] If p is True, then {$\neg$}{$\neg$}p is True. If p is False, then {$\neg$}$\neg$p is False
+\end{property}
+\begin{example}
+In the Sitcom Big Bang Theory S5E10 main character Sheldon Cooper says: I would not object to us no longer characterizing you as not my girlfriend. Linguistically, to object is the opposite of to accept, so Sheldon's words translate to: I do not not accept us no longer characterizing you as not my girlfriend. 
+Which is the same as: I do accept us no longer characterizing you as not my girlfriend. 
+Which is the same as: I do accept us characterizing you as my girlfriend. 
+\end{example}
+
+\begin{definition}[Conjunction, And operator] The conjunction of two propositions, denoted by p $\wedge$ q, is read "p and q", is True when both p and q are True.
+\end{definition} 
+The adjective \textit{conjunct} means joined \textit{together} or \textit{combined}.
+Note that p and q do not have to be related:
+p: 4 is a number
+q: A lion is a mammal 
+r: January is a week
+It might no be the best pick up line, but in proposition lgic the sentence \textit{4 is a number and a lion is a mammal} is a meaningful compo0und proposition.
+
+\begin{example}
+p $\wedge$ q is True, as both p and q are True.
+p $\wedge$ r is False, because not both p and r are True.
+\end{example}
+
+\begin{property}[Conjuction is commutative] The truth value of p $\wedge$  q is equal to the truth value of q $\wedge$ p.
+\end{property}
+In a compound conjuction p $\wedge$ q $\wedge$ r, the order of propositions has no effect on the truth value of overall truth value. The following propositions all have the same truth value:
+p $\wedge$ q $\wedge$ r,
+p $\wedge$ r $\wedge$ q,
+q $\wedge$ p $\wedge$ r,
+q $\wedge$ r $\wedge$ p,
+r $\wedge$ q $\wedge$ p,
+r $\wedge$ p $\wedge$ q
+\begin{property}[Idempotency of p $\wedge$  p] If p is True, p $\wedge$ p is True. If p is False, then p $\wedge$ p is False
+\end{property}
+Note that Conjuction itself is not idempotent: 
+Not in all cases is  p $\wedge$ q equal to p, e.g. when p is True and q is False: p $\wedge$ q is False, but p is True
+Not in all cases is  p $\wedge$ q equal to q. 
+But in all cases   p $\wedge$ p is equal to p 
+
+These two properties of disjunction can be used to simplify compound proposition into simpler ones or even a primitive one. This is in fact the core of logical reasoning. 
+If somewhere in logic you end up with a proposition p $\wedge$ q $\wedge$ q $\wedge$ p, then by using these properties you can simplify this.
+
+p $\wedge$ q $\wedge$ q $\wedge$ p
+equals to (Idempotency of q $\wedge$ q) 
+p $\wedge$ q $\wedge$ p
+equals to  (Conjuction is commutative)
+p $\wedge$ p $\wedge$ q
+equals to (Idempotency of p $\wedge$ p)
+p $\wedge$ q
+
+The logical reduction from  p $\wedge$ q $\wedge$ q $\wedge$ p to p $\wedge$ q is valid in all cases, no matter what the truth value p or q.				
+
+p $\wedge$ q $\wedge$ q $\wedge$ p
+equals to (Conjuction is commutative)
+p $\wedge$ p $\wedge$ q $\wedge$ q
+equals to  (Idempotency of p $\wedge$ p)
+p $\wedge$ q $\wedge$ q
+equals to (Idempotency of q $\wedge$ q)
+p $\wedge$ q
+
+The order in which properties are applied does not matter. 
+
+\begin{property}[p $\wedge$  False]  If any proposition in a disjunctive proposition is False, then the whole proposition is False. In other words: p $\wedge$  False is always False.
+\end{property}
+
+This property is often used in computer languages to optimize code.
+
+$$a = 5$$
+$$b = 3$$
+$$IF  a > 10  and b > 2 THEN do-something$$
+		
+If both $a > 10  and  b > 2$ are then the do-something part will be executed. 
+Typically a programming language will evaluate the IF part from left to right. 
+In this case $a > 10$ will be evaluated first. Since this is already False the remainder of the evaluation may be skipped and do-something will no be executed.
+
+\begin{property}[p $\wedge$  True]  If a proposition in a compound disjunctive proposition is True, it can be removed from the proposition. In other words: p $\wedge$  True is always equal to the truth value of p.
+\end{property}
+
+Although disjunction and conjunction appear to be two completey different operation, they are not. 
+\begin{property}
+$p${$\vee$}$q$ can be expressed as {$\neg$}({$\neg$}$p${$\wedge$}{$\neg$}$q$). 
+$p${$\wedge$}$q$ can be expressed as {$\neg$}({$\neg$}$p${$\vee$}{$\neg$}$q$).
+
+\end{property}
+
+
+
+\begin{definition}[Inclusive Disjunction, Or operator] The inclusive disjunction of two propositions, denoted by p $\vee$ q, is read "p or q", is True when p is True or q is True, or both are True
+\end{definition} 
+The adjective \textit{disjunct} means \textit{disjoined}, {distinct from one another} \textit{combined}.
+p: 4 is a number
+q: A lion is a mammal 
+r: January is a week
+
+
+\begin{example}
+p $\wedge$ q is True, as both p and q are True.
+p $\wedge$ r is False, because not both p and r are True.
+\end{example}
+
+\begin{property}[Conjuction is commutative] The truth value of p $\vee$  q is equal to the truth value of q $\vee$ p.
+\end{property}
+In a compound conjuction p $\wedge$ q $\wedge$ r, the order of propositions has no effect on the truth value of overall truth value. The following propositions all have the same truth value:
+p $\vee$ q $\vee$ r,
+p $\vee$ r $\vee$ q,
+q $\vee$ p $\vee$ r,
+q $\vee$ r $\vee$ p,
+r $\vee$ q $\vee$ p,
+r $\vee$ p $\vee$ q
+\begin{property}[Idempotency of p $\vee$  p] If p is True, p $\vee$ p is True. If p is False, then p $\vee$ p is False
+\end{property}
+Note that Disjunction itself is not idempotent: 
+Not in all cases is  p $\vee$ q equal to p, e.g. when p is True and q is False: p $\vee$ q is False, but p is True
+Not in all cases is  p $\vee$ q equal to q. 
+But in all cases   p $\vee$ p is equal to p 
+
+These two properties of disjunction can be used to simplify compound proposition into simpler ones or even a primitive one. This is in fact the core of logical reasoning. 
+If somewhere in logic you end up with a proposition p $\wedge$ q $\wedge$ q $\wedge$ p, then by using these properties you can simplify this.
+
+p $\vee$ q $\vee$ q $\vee$ p
+equals to (Idempotency of q $\vee$ q) 
+p $\vee$ q $\vee$ p
+equals to  (Conjuction is commutative)
+p $\vee$ p $\vee$ q
+equals to (Idempotency of p $\vee$ p)
+p $\vee$ q
+
+The logical reduction from  p $\vee$ q $\vee$ q $\vee$ p to p $\vee$ q is valid in all cases, no matter what the truth value p or q.				
+
+
+\begin{property}[p $\wedge$  True]  If any proposition in a disjunctive proposition is True, then the whole proposition is False. In other words: p $\vee$  True is always True.
+\end{property}
+
+This property is often used in computer languages to optimize code.
+
+$$a = 5$$
+$$b = 3$$
+$$IF  a < 10 or b < 2 THEN do-something$$
+		
+If either condition $a< 10$ or $ b < 2$ are then the do-something part will be executed. 
+
+Typically a programming language will evaluate the IF part from left to right. 
+In this case $a < 10$ will be evaluated first. Since this is True, the remainder of the evaluation may be skipped and do-something will be executed.
+
+\begin{tabular}{ |c|c|c|c| }
+\hline
+Language & not & and & or   \\
+\hline
+ C      & !   & \&\&  & \textbar\textbar  \\
+ Java   &  !  &  \&\& &  \textbar\textbar \\
+ Python & not & and   & or \\
+ ksh    &     &   &  \\
+ \hline
+\end{tabular}
+
+
+
+\begin{definition}[Truth table] A truth table has one column for each input variable, and one final column showing all of the possible results of the logical operation that the table represents. Each row of the truth table contains one possible configuration of the input variables.
+\end{definition} 
+
+The truth table of negation is as follows 
+\begin{center}
+\begin{tabular}{ |c| c| }
+ \hline
+ p & {$\neg$}p \\
+ \hline
+ False & True \\ 
+ True &  False \\
+ \hline
+\end{tabular}
+\end{center}
+
+For reasons of brevity we replace the values False and True by 0 and 1. 0 is False, 1 is True.
+
+
+The truth table for any compound proposition can be constructed as follows:
+\begin{itemize}
+ \item Add a column for every basic proposition 
+ \item Add a final column for the compound proposition
+ \item Add a row with every possible value combination of the basic propositions
+ \item Fill in the final column with the result for the compound proposition
+\end{itemize}
+
+\begin{example}
+For p $\vee$ q, the truth table is constructed:
+
+Add a column for every basic proposition, in this case p and q:
+\begin{center}
+\begin{tabular}{ |c| c| }
+ \hline
+ p & q \\
+ \hline
+\end{tabular}
+\end{center}
+
+Add a final column for the compound proposition
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p $\vee$ q  \\
+ \hline
+\end{tabular}
+\end{center}
+
+Add a row for every possible value combination of the basic propositions:
+p has two possible values, q has two possible values 
+There are 2 x 2 different value combinations possible. 
+We add 4 rows to the table:
+
+Add a final column for the compound proposition
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p $\vee$ q  \\
+ \hline
+ 0 & 0 & \\
+ 1 & 0 & \\
+ 0 & 1 & \\
+ 1 & 1 & \\
+
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+\end{example}
+
+Fill in the final column with the result for the compound proposition:
+
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p $\vee$ q  \\
+ \hline
+ 0 & 0 & 0\\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}
+\end{center}
+
+Truth tables are a handy tool to determine the truth value of compound propositions. However the height of the table doubles with every basic proposition, e.g. the truth table of {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r{$\wedge$}s{$\vee$}t{$\vee$}{$\neg$}u has 32 rows.
+
+
+In order the find the value for the compound proposition, additional column can be added to the truth table, with intermediate results
+
+\begin{example}
+{$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c| }
+
+ \hline
+ p & q & r &  {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r \\
+ \hline
+ 0 & 0 & 0 &\\
+ 1 & 0 & 0 &\\
+ 0 & 1 & 0 &\\
+ 1 & 1 & 0 &\\
+ 0 & 0 & 1 &\\
+ 1 & 0 & 1 &\\
+ 0 & 1 & 1 &\\
+ 1 & 1 & 1 &\\
+
+ \hline
+\end{tabular}
+\end{center}
+In this table it might be useful to add an extra column for  {$\neg$}p and a column for {$\neg$}r.
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+
+ \hline
+ p & q & r &  {$\neg$}p &{$\neg$}r & {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r \\
+ \hline
+ 0 & 0 & 0 & 1 & 1 &\\
+ 1 & 0 & 0 & 0 & 1 &\\
+ 0 & 1 & 0 & 1 & 1 &\\
+ 1 & 1 & 0 & 0 & 1 &\\
+ 0 & 0 & 1 & 1 & 0 &\\
+ 1 & 0 & 1 & 0 & 0 &\\
+ 0 & 1 & 1 & 1 & 0 &\\
+ 1 & 1 & 1 & 0 & 0 &\\
+ \hline
+\end{tabular}
+\end{center}
+
+
+The compound statement is {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r True when {$\neg$}p, q, {$\neg$}r are True.
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+
+ \hline
+ p & q & r &  {$\neg$}p &{$\neg$}r & {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r \\
+ \hline
+ 0 & 0 & 0 & 1 & 1 & 0\\
+ 1 & 0 & 0 & 0 & 1 & 0\\
+ 0 & \textbf{1} & 0 & \textbf{1} & \textbf{1} & \textbf{1}\\
+ 1 & 1 & 0 & 0 & 1 & 0\\
+ 0 & 0 & 1 & 1 & 0 & 0\\
+ 1 & 0 & 1 & 0 & 0 & 0\\
+ 0 & 1 & 1 & 1 & 0 & 0\\
+ 1 & 1 & 1 & 0 & 0 & 0\\
+ \hline
+\end{tabular}
+\end{center}
+\end{example}
+
+
+\section{other operators}
+
+\begin{definition}[Implication] The implication operator of two propositions, denoted by p $\rightarrow$ q produces a False truth in case the first operand is true and the second operand is false.  p $\rightarrow$ q is read \textit{p implies q}. $p$ is called the \textit{hypothesis}, $q$ is called the \textit{conclusion}.
+\end{definition} 
+An other way to read p $\rightarrow$ q  is  "\textit{If p, then q}" or  "\textit{p only if  q}"
+
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p $\rightarrow$ q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0 \\
+ 0 & 1 & 1 \\
+ 1 & 1 & 1 \\
+ \hline
+\end{tabular}
+\end{center}
+
+
+\begin{itemize}
+\item[$p$]: It rains
+\item[$q$]: The roof is wet
+\end{itemize}
+
+For my house, p $\rightarrow$ q is a valid statement.
+To determine its truth value, we examine the four possibilities
+
+\begin{itemize}
+\item It rains, the root is wet. (True)
+\item It doesn't rain, the roof isn't wet. (True)
+\item It rains, the roof is dry. (False, because rain implies roof wetness.)
+\item It doesn't rain, the roof isn't wet. (True, there may be other reason for my roof being wet)
+\end{itemize}
+
+It might no be the best pick up line, but in proposition lgic the sentence \textit{4 is a number and a lion is a mammal} is a meaningful compound proposition.
+
+\section{Truth Functions}
+\index{Truth Function}
+In proposition logic, there are sixteen possible truth tables for propositions $p$ and $q$, also called truth functions of $p$ and $q$. Any of these functions correspond to a logical connective, including several cases where the function is  not depending on one or both of its arguments.
+\index{Truth Function} 
+
+\begin{definition}[Contradiction] $p \bot q $ is always False.
+\end{definition}  
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p \bot q $ \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+By itself this truth function makes little sense. Why would your ever reason with something that is always false?
+\textit{Proof by contradiction }is  is a form of proof that establishes the truth or the validity of a proposition, by showing that assuming the proposition to be false leads to a contradiction. 
+A mathematical proof employing proof by contradiction usually proceeds as follows:
+\begin{itemize}
+\item The proposition to be proved is $p$.
+\item We assume $p$ to be false, i.e., we assume $\neg p$.
+\item It is then shown that $\neg p$implies falsehood. 
+\item Since assuming $\neg p$ to be false leads to a contradiction, it is concluded that $ p$is in fact true.
+\end{itemize}
+A famous proof by contradiction is: $\sqrt{2}$ is an irrational number. 
+\begin{itemize}
+\item If assume $\sqrt{2}$  to rational, then $\sqrt{2} = \frac{p}{q}$, where $p$ and $q$ are integers without common factors and $q \neq 0$
+\item So, $ 2 = \frac{p^2}{q^2} $   
+\item So, $ p^2 = 2{q^2} $ which means $p$ is even and can be rewritten as $ 2k$ ($k$ is an integer)
+\item So,  $ p^2 = 4k^2$, and also $ q^2 = 2k^2$
+\item So, $q$ is even
+\item Contradiction: Both $p$ and $q$ are even, which contradicts that do not share factors. Hence  \textit{$\sqrt{2}$  is not rational}
+
+
+\end{itemize}
+
+\begin{definition}[Tautology]
+$p \top q $ is always True.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p $\top$  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}  \\\\
+An example \textit{the ball is red, or the ball is not red} is always True, regardless of the colour of the ball.
+
+In linguistics a \textit {tautology} means \textit{useless repetion}, also {saying the same twice}. In the sentence \textit{This explanation should be adaquate enough}, the word \textit{enough} is only a repetition of \textit{adequate}. Removing it from the sentence does not change the meaning of the sentence. \\
+
+In programming you might accidentally encounter tautologies. More often than not they indicate a programming mistake. \\
+\textbf{IF x $<$= 0 OR  x $>$=0 THEN \textit{dosomething()}}\\
+which is the same as \\
+\textbf{IF TRUE THEN \textit{dosomething()}}\\
+which is the same as \\
+\textbf{dosomething()}\\
+thus removing the conditional statement altogether.
+
+
+
+\begin{center} 
+\textbf{The tautology Limerick}.\\
+There once was a fellow in Perth \\
+Who was born on the day of his birth. \\
+He was married, they say, \\
+On his wife's wedding day, \\
+And he died when he quitted this earth 
+\end{center}
+
+
+\begin{definition}[Conjunction] A  binary proposition that is True, if any proposition is True
+\end{definition}  
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p \vee q $ \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Converse non implication]ddd
+\end{definition}  
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Proposition Q]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+
+\begin{definition}[Material non implication]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Proposition of P]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 0\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Exclusive disjunction:]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Disjunction]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Joint denial]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Biconditional ]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Negation of P ]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+
+\begin{definition}[Material implication  ]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Negation of Q ]ddd
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Converse implication]ddd
+\end{definition}
+
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p  q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 0\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}
+
+As we will see in Logic Programming, there are situations where $q  \leftarrow p$  is more convenient than $ p \rightarrow q$.
+
+\begin{definition}[Alternative Denial, Nand, Sheffer Stroke]
+p $\uparrow$  q is True if not both are True.
+\end{definition}
+
+\begin{tabular}{ |c|c|c| }
+ \hline
+ p & q &  p$\uparrow$q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}  \\\\
+The word \textit{nand} does not exist in the English language, it stands for \textit{not and}. which make the liguisitic interpretation: When provided a choice between two options: you are allowed to choose none or one, but not both.\\
+The operator is named after \textbf{Henry Sheffer} who proved that Boolean algebra could be defined using a only Alternative Denial. \\
+
+The importance of Alternative Denial can not be overrated. In hard The electrical component 
+
+
+
+Regular programming languages do not incorporate the nand operator. Good that we have the equavilent $\neg$ (p$\wedge$q) 
+
+\# can only choose one of the options
+IF NOT (option1 or option2) THEN 
+	process order\(\)
+ELSE 
+	print error message
+
+
+
+
+
+
+
+\section{Exercises}
+\index{Exercise}
+\begin{exercise}
+Double negative: "We don't need no education"
+On average human a human being has 10 fingers.
+
+which is better not p or not q or not r     versus  not (p and q and r)
+\end{exercise}
+\begin{exercise}
+(Dis)prove using truth tables:
+\begin{itemize}
+\item ($p${$\vee$}$q$){$\vee$}$r${$\leftrightarrow$}$p${$\vee$}($q${$\vee$}$r$)
+\item ($p${$\rightarrow$}$q$){$\rightarrow$}$r${$\leftrightarrow$}$p${$\rightarrow$}($q${$\rightarrow$}$r$)
+\end{itemize}
+What is boys will be boys (Tautology)
+Explain :s a tautology a paradox? 
+No. A paradox doesn't just assert something incorrect (e.g. "0 not equal to 0") - it asserts something which cannot be consistently assigned a truth value. Just implying the negation of a tautology doesn't mean that a statement is paradoxical: e.g. "p and ¬p" is not a paradox, it's just a false statement
+
+
+\end{exercise}
+\chapter{definitions}
+
+
+
+\end{document}
+
