@@ -194,7 +194,7 @@ $\top p $ is always True.
 \end{center} 
 An example \textit{the ball is red, or the ball is not red} is always True, regardless of the colour of the ball.
 In linguistics a \textit {tautology} means \textit{useless repetion}, also {saying the same twice}. In the sentence \textit{This explanation should be adequate enough}, the word \textit{enough} is only a repetition of \textit{adequate}. Removing it from the sentence does not change the meaning of the sentence. \\
-In programming you might accidentally encounter tautologies. As with contradictions they often indicate aprogramming mistake. \\
+In programming you might accidentally encounter tautologies. As with contradictions they often indicate a programming mistake. \\
 \textbf{IF x $<$= 0 OR  x $>$=0 THEN \textit{dosomething()}}\\
 which is the same as \\
 \textbf{IF TRUE THEN \textit{dosomething()}}\\
@@ -229,33 +229,31 @@ Identity is only mentioned for reasons of completeness. This operator does not c
 
 \section{Binary Logical Operators}
 \begin{definition}[Binary Logical Operator]
-An operation that works with two proposition. Other textbooks mt use the terms\textit{Truth Function}, \textit{Boole Function}
+An operation that works with two propositions. Other textbooks may use the terms \textit{Truth Function}, \textit{Boole Function}.
 \end{definition}
-Truth tables for binary logical operators have an extra column for the truth values of $q$ and two extra rows to incorporate every combination of truth values of $p$ and $q$.
+Truth tables for binary logical operators have an extra column for the truth values of $q$ and two extra rows to incorporate every combination of truth values of $p$ and $q$. \\
+Imagine $\boxplus$ is a binary logical operator, then the truth table would be:
+
 \begin{center}
 \begin{tabular}{ |c|c|c| }
 
  \hline
- $p$ & $q$ & \textit{result} \\
+ $p$ & $q$ & $p \boxplus q$ \\
  \hline
- 0 & 0 &  \\
- 1 & 0 &  \\
- 0 & 1 &  \\
- 1 & 1 &  \\
+ 0 & 0 & ? \\
+ 1 & 0 & ? \\
+ 0 & 1 & ? \\
+ 1 & 1 & ? \\
  \hline
 \end{tabular}
 \end{center}
-The result column has 16 possible outcome going from (0,0,0,0) to  (1,1,1,1). There is an operator for every possible outcome, not all operators are being used as often.
+For every of thee 16 possible outcomes ranging from (0,0,0,0) to  (1,1,1,1), there is an operator for. However, as we'll see further on: not not all operators are being used as often.
 
-\begin{itemize}
-\item p: 4 is a number
-\item q: A lion is a mammal 
-\item r: January is a week
-\item s: \# is a vowel
-\end{itemize} 
-
-
-\begin{definition}[Conjunction, And operator] $p \wedge q$, is read "p and q", is True when both $p$ and $q$ are True.
+\begin{definition}[Converse proposition] Result of reversing its two constituent statements
+\end{definition}
+The converse of  $p{\boxplus}q$  is  $q{\boxplus}p$ \\ \\\
+\textbf{Important:} The following definitions determine when the truth value of the logical binary operations on $p$, $q$ is True. It is False in for all other truth value of $p$, $q$.
+\begin{definition}[Conjunction, And] $p{\wedge}q$, read ``p and q'', is True when both $p$ and $q$ are True.
 \end{definition} 
 \begin{center}
 \begin{tabular}{ |c|c|c| }
@@ -270,15 +268,21 @@ The result column has 16 possible outcome going from (0,0,0,0) to  (1,1,1,1). Th
 \end{tabular}
 \end{center}
 FYI, the adjective \textit{conjunct} means \textit{joined together} or \textit{combined}.\\
-Note that $p$ and $q$ do not have to be related:
-
-It might no be the best pick up line, but the sentence \textit{4 is a number and a lion is a mammal.} is a meaningful True compound proposition. \\
+Note that $p$ and $q$ do not have to be related: It might no be the best pick up line, but the sentence \textit{``4 is a number and a lion is a mammal''} is a meaningful True compound proposition. \\
+\begin{itemize}
+\item p: 4 is a number
+\item q: A lion is a mammal 
+\item r: January is a week
+\item s: \# is a vowel
+\end{itemize}
 \begin{itemize}
 \item $p \wedge q$ is True 
 \item $p \wedge r$ is False
 \item $r \wedge q$ is False
 \end{itemize}
-Conjunction is so widely used that is a built-in   in all popular programming languages.\\
+
+Conjunction is so widely used that is a built-in in all popular programming languages.\\
+\begin{center}
 \begin{tabular}{ |c|c| }
 \hline
 Language & and \\
@@ -289,6 +293,7 @@ Language & and \\
  \hline
 \end{tabular}
 
+\end{center}
 
 \begin{definition}[Inclusive Disjunction, Or operator] $p \vee q$, is read \textit{"p or q"} is True when $p$ is True, $q$ it True, or both are True. \end{definition}
 \begin{tabular}{ |c|c|c| }
@@ -301,7 +306,8 @@ Language & and \\
  1 & 1 & 1\\
  \hline
 \end{tabular}\\\\
-In spoken language \textit{or} often means \textit{pick one but not both}. This is \textbf{not} the Inclusive Disjunction, as this operator also allows both $p$ and $a$ to be True. 
+In spoken language \textit{or} often means \textit{pick one but not both} which is the \textit{Exclusive disjunction}.
+The pronoun \textit{Inclusive} denotes that picking both options is allowed.  
 \begin{itemize}
 \item $p \vee q$ is True 
 \item $p \vee r$ is True
@@ -318,14 +324,31 @@ Language & or \\
  \hline
 \end{tabular}
 
-\begin{definition}[Implication] $p \rightarrow q$ , read \textit{"p implies q"} is False when $p$ is True and $q$ is False.  $p$ is called the \textit{hypothesis}, $q$ is called the \textit{conclusion}.
+
+\begin{definition}[Exclusive disjunction, Exclusive Or, Xor operattin]$p \oplus q$, is read \textit{"p xor q"} is True when either $p$ is True or $q$ is True, but not both. \end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p{\oplus}q$  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+Another way to read $p{\oplus}q$ is: \textit{Does not have the same truth value as}.
+The pronoun \textit{Exclusive} denotes that picking both options is not allowed.  
+
+% todo: refer to xor in imaging and encryption
+
+\begin{definition}[Material Implication] $p \rightarrow q$ , read \textit{"p implies q"} is False when $p$ is True and $q$ is False.  
 \end{definition} 
-Other ways to read p $\rightarrow$ q  is  "\textit{If p, then q}" or  "\textit{p only if  q}"
+Other ways to read $p \rightarrow q$  is  "\textit{If p, then q}"
 
 \begin{center}
 \begin{tabular}{ |c|c|c| }
  \hline
- p & q &  p $\rightarrow$ q  \\
+ $p$ & $q$ &  $p \rightarrow q$  \\
  \hline
  0 & 0 & 1 \\
  1 & 0 & 0 \\
@@ -347,166 +370,15 @@ To determine its truth value, we examine the four possibilities
 \item It rains, the roof isn't wet . (False, because rain implies roof wetness.)
 \item It doesn't rain, the roof isn't wet. (True, there may be other reason for my roof being wet)
 \end{itemize}
-Implication is a powerful tools in mathematical reasoning. 
+Implication is a powerful tools in \textit{one way} reasoning. 
+% Todo: add an example
 
-
-
-
-\section{Truth Functions}
-\index{Truth Function}
-In proposition logic, there are sixteen possible truth tables for propositions $p$ and $q$, also called truth functions of $p$ and $q$. Any of these functions correspond to a logical connective, including several cases where the function is  not depending on one or both of its arguments.
-\index{Truth Function} 
-
-
-
-
-\begin{definition}[Converse non implication]ddd
-\end{definition}  
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 0\\
- 0 & 1 & 1\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-\begin{definition}[Proposition Q]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 0\\
- 0 & 1 & 1\\
- 1 & 1 & 1\\
- \hline
-\end{tabular}\\\\
-
-
-
-\begin{definition}[Material non implication]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 1\\
- 0 & 1 & 0\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-\begin{definition}[Proposition of P]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 1\\
- 0 & 1 & 0\\
- 1 & 1 & 1\\
- \hline
-\end{tabular}\\\\
-
-
-\begin{definition}[Exclusive disjunction:]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 1\\
- 0 & 1 & 1\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-
-
-\begin{definition}[Joint denial]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 1 \\
- 1 & 0 & 0\\
- 0 & 1 & 0\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-\begin{definition}[Biconditional ]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 1 \\
- 1 & 0 & 0\\
- 0 & 1 & 0\\
- 1 & 1 & 1\\
- \hline
-\end{tabular}\\\\
-
-\begin{definition}[Negation of P ]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 1 \\
- 1 & 0 & 0\\
- 0 & 1 & 1\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-
-\begin{definition}[Material implication  ]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 1 \\
- 1 & 0 & 0\\
- 0 & 1 & 1\\
- 1 & 1 & 1\\
- \hline
-\end{tabular}\\\\
-
-\begin{definition}[Negation of Q ]ddd
-\end{definition}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p  q  \\
- \hline
- 0 & 0 & 1 \\
- 1 & 0 & 1\\
- 0 & 1 & 0\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-\begin{definition}[Converse implication]ddd
+\begin{definition}[Converse Implication]
 \end{definition}
 
 \begin{tabular}{ |c|c|c| }
  \hline
- p & q &  p  q  \\
+ $p$ & $q$ &  $p{\leftarrow}q$  \\
  \hline
  0 & 0 & 1 \\
  1 & 0 & 1\\
@@ -514,16 +386,34 @@ In proposition logic, there are sixteen possible truth tables for propositions $
  1 & 1 & 1\\
  \hline
 \end{tabular}
+As defined $p{\leftarrow}q$ is the converse of $q{\rightarrow}p$.
+There are situation where $p{\leftarrow}q$ is clearer than $q{\rightarrow}p$, e.g. logical programming.
 
-As we will see in Logic Programming, there are situations where $q  \leftarrow p$  is more convenient than $ p \rightarrow q$.
 
-\begin{definition}[Alternative Denial, Nand, Sheffer Stroke]
-p $\uparrow$  q is True if not both are True.
+\begin{definition}[Biconditional] $p{\leftrightarrow}q$, read $p$ if only $q$, is True if and only if $p$ and $q$ are both False or both True
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  p $p{\leftrightarrow}q$ q  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+This operator can be used to simplify compound propositions. \\
+Later in this chapter we'll \textit{reason} that:
+$(p{\vee}q)\wedge{\neg}(p{\wedge}q)\wedge({\neg}p{\vee}{\neg}q) \leftrightarrow p \oplus q$\\
+This means that whenever you come across a compound proposition $(p{\vee}q)\wedge{\neg}(p{\wedge}q)\wedge({\neg}p{\vee}{\neg}q)$, you are allowed to replace it by $p \oplus q$, and the truth value of the proprosition remains identical.
+
+
+\begin{definition}[Alternative Denial, Nand, Sheffer Stroke] $p \uparrow  q$, read $p$ \textit{nand} $q$  is True if not both are True.
 \end{definition}
 
 \begin{tabular}{ |c|c|c| }
  \hline
- p & q &  p$\uparrow$q  \\
+ $p$ & $q$ &  $p{\uparrow}q$  \\
  \hline
  0 & 0 & 1 \\
  1 & 0 & 1\\
@@ -534,17 +424,147 @@ p $\uparrow$  q is True if not both are True.
 The word \textit{nand} does not exist in the English language, it stands for \textit{not and}. which make the liguisitic interpretation: When provided a choice between two options: you are allowed to choose none or one, but not both.\\
 The operator is named after \textbf{Henry Sheffer} who proved that Boolean algebra could be defined using a only Alternative Denial. \\
 
-The importance of Alternative Denial can not be overrated. In hard The electrical component 
+The importance of Alternative Denial can not be overrated. 
+Regular programming languages do not incorporate the nand operator. 
 
 
 
-Regular programming languages do not incorporate the nand operator. Good that we have the equavilent $\neg$ (p$\wedge$q) 
 
-\# can only choose one of the options
-IF NOT (option1 or option2) THEN 
-	process order\(\)
-ELSE 
-	print error message
+\begin{definition}[Converse Non implication]$p{\nleftarrow}q$, read $q$ does not imply $p$ 
+\end{definition}  
+\begin{tabular}{ |c|c|c| }
+ \hline
+   $p$ & $q$ &  $p q$  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+
+
+
+
+\begin{definition}[Material Non Implication]$p{\nrightarrow}q$, read ``p but not q'', is True when p is True and q is False.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ & $p{\nrightarrow}q$  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 1\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+
+
+\begin{definition}[Joint Denial, Nor]$p{\downarrow}q$, read `` $p$ nor $q$'', is True when $p$ and $q$ are both False.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+   $p$ & $q$ &  $p{\downarrow}q$ \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+Nor can also be read ``\textit{neither $p$ or $q$}''; It is True when both can be denied, hence \textit{joint denial}.\\
+
+For reasons of completeness we mention the remaining binary logical operators.
+Although these six operators are binary in the strict sense of the word, their underlying function is unary as they ignore at least one operand. 
+
+
+\begin{definition}[Proposition of p] p, read ``p'', is True when p its True.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p$ \\
+ \hline
+ 0 & 0 & 0 \\ 
+ 1 & 0 & 1\\
+ 0 & 1 & 0 \\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Proposition of q] q, read ``q'', is True when q its True.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $q$ \\
+ \hline
+ 0 & 0 & 0 \\ 
+ 1 & 0 & 0\\
+ 0 & 1 & 1 \\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+\begin{definition}[Negation of p] ${\neg}p$, read ``not $p$'', is True when $p$ is False.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  ${\neg}p$  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Negation of q] ${\neg}q$, read ``not $q$'', is True when $q$ is False.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  ${\neg}q$  \\
+ \hline
+ 0 & 0 & 1 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Contradiction] $p{\bot}q$, ``read \textit{contradiction}'', is always False.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p{\bot}q$  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 0\\
+ 1 & 1 & 0\\
+ \hline
+\end{tabular}\\\\
+
+\begin{definition}[Tautology] $p{\top}q$, read ``\textit{tautology}'', is always True.
+\end{definition}
+\begin{tabular}{ |c|c|c| }
+ \hline
+ $p$ & $q$ &  $p{\top}q$  \\
+ \hline
+ 0 & 0 & 1\\
+ 1 & 0 & 1\\
+ 0 & 1 & 1\\
+ 1 & 1 & 1\\
+ \hline
+\end{tabular}\\\\
+
+
+
+As we will see in Logic Programming, there are situations where $q  \leftarrow p$  is more convenient than $ p \rightarrow q$.
+
 
 \begin{definition}[Truth table] A truth table has one column for each input variable, and one final column showing all of the possible results of the logical operation that the table represents. Each row of the truth table contains one possible configuration of the input variables.
 \end{definition} 
@@ -562,6 +582,7 @@ The truth table of negation is as follows
 \end{center}
 
 For reasons of brevity we replace the values False and True by 0 and 1. 0 is False, 1 is True.
+
 
 
 The truth table for any compound proposition can be constructed as follows:
