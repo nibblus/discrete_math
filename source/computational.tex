@@ -4,12 +4,14 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{soul}
+
 \usepackage[english]{babel}
 \usepackage{index}
 \makeindex
 \usepackage{url}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}{Definition}[subsection]
 \newtheorem{remark}{Remark}
 \newtheorem{example}{Example}[section]
 \newtheorem{property}{Property}[section]
@@ -36,29 +38,30 @@ Also note theat English is not my mother tongue, so if you find any Yoda-like gi
 \chapter{Fundamentals of Logic}
 \section*{Introduction}
 Logic is the core all mathematical reasoning. The rules of logic specify the meaning of mathematical statements and how transform one into another. 
-In this chapter we'll formalize reasoning.
+In this chapter we'll formalize reasoning. 
+We'll start with propositions, the most basic building blocks in logic. And build up to a systematic model for reasoning.
+As logic and computer science go hand in hand, a \textit{lot} of section will refer on how to apply them the computer languague or digital techniques.
 
 \section{Core Operations and Properties}
-Everything starts with a proposition, it is the most basic building block in logic.
 \begin{definition}[Proposition]
 A declarative sentence that is either True or False, but not both. Other sources may use the term \textit{statement} instead. Both are interchangeable. 
 \end{definition}
 Propositions are notated as lowercase letters:
 \begin{itemize}
- \item[$p$]: Beethoven wrote 9 symphonies. (True)
- \item[$q$]: Einstein lived in Germany and the United States. (True)
- \item[$r$]: $ 1 + 3 = 5 $ (False)
-\end{itemize}
+ \item[$p$:]Beethoven wrote 9 symphonies. (True)
+ \item[$q$:]Einstein lived in Germany and the United States. (True)
+ \item[$r$:]$ 1 + 3 = 5 $ (False)
+\end{itemize} 
 In order to confirm that propositions $p$ and $q$ are True, you probably have to check an historical source. For now we ask you to trust us. 
 Proposition $r$ is clearly wrong, however it is a valid proposition with truth value False. \\ \\
 Not every sentence is a proposition. None of the following sentences is a proposition:
 \begin{itemize}
- \item[$s$]  Get out! (No truth value)
- \item[$t$]  2{$x$}+1=5 (Might be True or False, depending on the value of x)
- \item[$u$]  Such a nice flower. (No truth value)
- \item[$v$]  Every even positive integer greater than 2 is the sum of two prime numbers. \textit{(Goldbach’s Conjecture)} (Unknown)
+ \item[$s$:]Get out! (No truth value)
+ \item[$t$:]$2x+1=5$ (Might be True or False, depending on the value of x)
+ \item[$u$:]Such a nice flower. (No truth value)
+ \item[$v$:]Every even positive integer greater than 2 is the sum of two prime numbers. \textit{(Goldbach’s Conjecture)} (Unknown)
 \end{itemize}
-At the time of writing \textit{Goldbach's Conjecture} is still unproven, therefore its truth value is Unknown. If a at the time of reading some has (dis)proven the conjecture, then $v$ will be a proposition. For the first and only time in this book: \textit{the proof is left to the reader.}
+At the time of writing \textit{Goldbach's Conjecture} is still unproven, therefore its truth value is Unknown. If at the time of reading someone has (dis)proven the conjecture, then $v$ will be a proposition. For the first and only time in this book: \textit{the proof is left to the reader.}
 
 \begin{definition}[Primitive Proposition]
 A proposition that can not be broken down into simpler propositions. Other sources may use the term \textit{atomic} instead. Both are interchangeable. 
@@ -228,104 +231,56 @@ $=p$ is equal to $p$
 Identity is only mentioned for reasons of completeness. This operator does not change the truth value, and can be omitted at all times.
 
 \section{Binary Logical Operators}
+\subsection*{Introduction}
 \begin{definition}[Binary Logical Operator]
 An operation that works with two propositions. Other textbooks may use the terms \textit{Truth Function}, \textit{Boole Function}.
 \end{definition}
-Truth tables for binary logical operators have an extra column for the truth values of $q$ and two extra rows to incorporate every combination of truth values of $p$ and $q$. \\
-Imagine $\boxplus$ is a binary logical operator, then the truth table would be:
-
-\begin{center}
+Truth tables for binary logical operators have an extra column for the truth values of $q$ and two extra rows to include every combination of truth values of $p$ and $q$. \\
+Imagine $\boxplus$ is a binary logical operator, then the truth table would be:\\
 \begin{tabular}{ |c|c|c| }
-
  \hline
  $p$ & $q$ & $p \boxplus q$ \\
- \hline
+ \hline 
  0 & 0 & ? \\
  1 & 0 & ? \\
  0 & 1 & ? \\
  1 & 1 & ? \\
  \hline
-\end{tabular}
-\end{center}
-For every of thee 16 possible outcomes ranging from (0,0,0,0) to  (1,1,1,1), there is an operator for. However, as we'll see further on: not not all operators are being used as often.
-
-\begin{definition}[Converse proposition] Result of reversing its two constituent statements
+\end{tabular} \\
+For every of the 16 possible outcomes ranging from (0,0,0,0) to  (1,1,1,1), there is an operator. However, as we'll see further on: not all operators are being used as often.
+\begin{definition}[Converse proposition] Result of reversing the two constituent propositions.
 \end{definition}
-The converse of  $p{\boxplus}q$  is  $q{\boxplus}p$ \\ \\\
-\textbf{Important:} The following definitions determine when the truth value of the logical binary operations on $p$, $q$ is True. It is False in for all other truth value of $p$, $q$.
-\begin{definition}[Conjunction, And] $p{\wedge}q$, read ``p and q'', is True when both $p$ and $q$ are True.
+The converse of  $p{\boxplus}q$  is  $q{\boxplus}p$. \\ \\ 
+\textbf{Important:} To simplify the definition in the next section, we'll determine when the operator results in truth value True. It is False in all other cases.
+\subsection{Operators}
+\begin{definition}[Conjunction, And Operator] $p{\wedge}q$, read ``p and q'', is True when both $p$ and $q$ are True.
 \end{definition} 
-\begin{center}
 \begin{tabular}{ |c|c|c| }
  \hline
- $p$ & $q$ &  $p \wedge q$  \\
+ $p$ & $q$ &  $p{\wedge}q$  \\
  \hline
  0 & 0 & 0 \\
  1 & 0 & 0 \\
  0 & 1 & 0 \\
  1 & 1 & 1 \\
  \hline
-\end{tabular}
-\end{center}
-FYI, the adjective \textit{conjunct} means \textit{joined together} or \textit{combined}.\\
-Note that $p$ and $q$ do not have to be related: It might no be the best pick up line, but the sentence \textit{``4 is a number and a lion is a mammal''} is a meaningful True compound proposition. \\
-\begin{itemize}
-\item p: 4 is a number
-\item q: A lion is a mammal 
-\item r: January is a week
-\item s: \# is a vowel
-\end{itemize}
-\begin{itemize}
-\item $p \wedge q$ is True 
-\item $p \wedge r$ is False
-\item $r \wedge q$ is False
-\end{itemize}
-
-Conjunction is so widely used that is a built-in in all popular programming languages.\\
-\begin{center}
-\begin{tabular}{ |c|c| }
-\hline
-Language & and \\
-\hline
- C      &  \&\& \\
- Java   & \&\& \\
- Python & and    \\
- \hline
-\end{tabular}
-
-\end{center}
-
-\begin{definition}[Inclusive Disjunction, Or operator] $p \vee q$, is read \textit{"p or q"} is True when $p$ is True, $q$ it True, or both are True. \end{definition}
+\end{tabular}\\
+We use the term \textit{conjunction} to clearly distinguish the logical operator \textit{and} and the linguistic connective \textit{and}. Note that the propositions itself do not have to be related: It might no be the best pick up line, but the sentence \textit{``4 is a number and a lion is a mammal''} is a meaningful True compound proposition. \\
+\begin{definition}[Inclusive Disjunction, Or Operator]  $p{\vee}q$, is read \textit{``p or q"} is True when $p$ is True, $q$ is True, or both are True. \\\end{definition} 
 \begin{tabular}{ |c|c|c| }
  \hline
- $p$ & $q$ &  $p \vee q$  \\
+ $p$ & $q$ &  $p{\vee}q$  \\
  \hline
  0 & 0 & 0 \\
  1 & 0 & 1\\
  0 & 1 & 1\\ 
  1 & 1 & 1\\
  \hline
-\end{tabular}\\\\
-In spoken language \textit{or} often means \textit{pick one but not both} which is the \textit{Exclusive disjunction}.
-The pronoun \textit{Inclusive} denotes that picking both options is allowed.  
-\begin{itemize}
-\item $p \vee q$ is True 
-\item $p \vee r$ is True
-\item $s \vee r$ is False
-\end{itemize}
-Disjunction is so widely used that is a built-in in all popular programming languages.\\
-\begin{tabular}{ |c|c| }
-\hline
-Language & or \\
-\hline
- C      &  \textbar\textbar  \\
- Java   & \textbar\textbar  \\
- Python & or   \\
- \hline
-\end{tabular}
+\end{tabular}\\
+The pronoun \textit{Inclusive} denotes that picking both options is allowed.  In spoken language \textit{or} often means \textit{pick one but not both} which is the \textit{Exclusive disjunction} (see below).\\
+If you would be make it to the final of the game show \textit{Let's make a deal}, and the hosts presents your with the choice: \textit{Which door would you like to open to reveal your price? Door number  or door number 23?}. The best logical answer would be \textit{Yes} to get the prices behind both doors.
 
-
-\begin{definition}[Exclusive disjunction, Exclusive Or, Xor operattin]$p \oplus q$, is read \textit{"p xor q"} is True when either $p$ is True or $q$ is True, but not both. \end{definition}
+\begin{definition}[Exclusive Disjunction, Exclusive Or, Xor Operation] $p{\oplus}q$ , is read \textit{``p xor q"} is True when either $p$ is True or $q$ is True, but not both. \end{definition}
 \begin{tabular}{ |c|c|c| }
  \hline
  $p$ & $q$ &  $p{\oplus}q$  \\
@@ -336,46 +291,25 @@ Language & or \\
  1 & 1 & 0\\
  \hline
 \end{tabular}\\\\
-Another way to read $p{\oplus}q$ is: \textit{Does not have the same truth value as}.
-The pronoun \textit{Exclusive} denotes that picking both options is not allowed.  
+Another way to interpret $p{\oplus}q$ is: \textit{Does not have the same truth value as}.
+The pronoun \textit{Exclusive} denotes that picking both options is not allowed. In this case, when having to choose between door number 1 xor 2, you're on your own.
 
-% todo: refer to xor in imaging and encryption
-
-\begin{definition}[Material Implication] $p \rightarrow q$ , read \textit{"p implies q"} is False when $p$ is True and $q$ is False.  
+\begin{definition}[Material Implication] $p{\rightarrow}q$, read \textit{``p implies q"} is False when $p$ is True and $q$ is False.  
 \end{definition} 
-Other ways to read $p \rightarrow q$  is  "\textit{If p, then q}"
-
-\begin{center}
 \begin{tabular}{ |c|c|c| }
  \hline
- $p$ & $q$ &  $p \rightarrow q$  \\
+ $p$ & $q$ &  $p{\rightarrow}q$  \\
  \hline
  0 & 0 & 1 \\
  1 & 0 & 0 \\
  0 & 1 & 1 \\
  1 & 1 & 1 \\
  \hline
-\end{tabular}
-\end{center}
+\end{tabular} \\
+Implication is a powerful tool in logical reasoning. If we know that $p{\rightarrow}q$ and $q{\rightarrow}r$, then we can conclude that $p{\rightarrow}r$. This will be proven later on. This kind of reasoning in \textit{one way}. The truth of $p$ implies the truth of $q$. However, if $q$ is True, then we can \textit{not} logically deduce truth value of $p$., e.g. $p$: It rains; $q$ The street is wet.  $p{\rightarrow}q$ now reads: \textit{If it rains then the street is wet}.  The street being wet does not imply that it rains, as there might be other reasons.
 
-
-\begin{itemize}
-\item[$u$]: It rains
-\item[$v$]: The roof of my house is wet
-\end{itemize}
-To determine its truth value, we examine the four possibilities
-\begin{itemize}
-\item It rains, the root is wet. (True)
-\item It doesn't rain, the roof isn't wet. (True)
-\item It rains, the roof isn't wet . (False, because rain implies roof wetness.)
-\item It doesn't rain, the roof isn't wet. (True, there may be other reason for my roof being wet)
-\end{itemize}
-Implication is a powerful tools in \textit{one way} reasoning. 
-% Todo: add an example
-
-\begin{definition}[Converse Implication]
+\begin{definition}[Converse Implication] $p{\leftarrow}q$, read \textit{``q implies p"} is False when $p$ is False and $q$ is True.  
 \end{definition}
-
 \begin{tabular}{ |c|c|c| }
  \hline
  $p$ & $q$ &  $p{\leftarrow}q$  \\
@@ -385,16 +319,16 @@ Implication is a powerful tools in \textit{one way} reasoning.
  0 & 1 & 0\\
  1 & 1 & 1\\
  \hline
-\end{tabular}
+\end{tabular}\\
 As defined $p{\leftarrow}q$ is the converse of $q{\rightarrow}p$.
 There are situation where $p{\leftarrow}q$ is clearer than $q{\rightarrow}p$, e.g. logical programming.
 
 
-\begin{definition}[Biconditional] $p{\leftrightarrow}q$, read $p$ if only $q$, is True if and only if $p$ and $q$ are both False or both True
+\begin{definition}[Biconditional] $p{\leftrightarrow}q$, read ``$p$ if and only if  $q$", is True if $p$ and $q$ are both False or both True.
 \end{definition}
 \begin{tabular}{ |c|c|c| }
  \hline
- $p$ & $q$ &  p $p{\leftrightarrow}q$ q  \\
+ $p$ & $q$ &   $p{\leftrightarrow}q$\\
  \hline
  0 & 0 & 1 \\
  1 & 0 & 0\\
@@ -402,15 +336,14 @@ There are situation where $p{\leftarrow}q$ is clearer than $q{\rightarrow}p$, e.
  1 & 1 & 1\\
  \hline
 \end{tabular}\\\\
-This operator can be used to simplify compound propositions. \\
+Biconditional is a powerful tool in logical reasoning. If we know that $p{\leftrightarrow}q$ and $q{\leftrightarrow}r$, then we can conclude that $p{\leftrightarrow}r$. This will be proven later on. This kind of reasoning in \textit{two way}. The truth of $p$ implies the truth of $q$ and if $q$ is True, then we can logically deduce truth value of $p$., This operator can be used to simplify compound propositions. \\
 Later in this chapter we'll \textit{reason} that:
 $(p{\vee}q)\wedge{\neg}(p{\wedge}q)\wedge({\neg}p{\vee}{\neg}q) \leftrightarrow p \oplus q$\\
-This means that whenever you come across a compound proposition $(p{\vee}q)\wedge{\neg}(p{\wedge}q)\wedge({\neg}p{\vee}{\neg}q)$, you are allowed to replace it by $p \oplus q$, and the truth value of the proprosition remains identical.
+This means that whenever you come across a compound proposition $(p{\vee}q)\wedge{\neg}(p{\wedge}q)\wedge({\neg}p{\vee}{\neg}q)$, you are allowed to replace it by $p \oplus q$, and the truth value of the proposition will remain identical.
 
 
-\begin{definition}[Alternative Denial, Nand, Sheffer Stroke] $p \uparrow  q$, read $p$ \textit{nand} $q$  is True if not both are True.
+\begin{definition}[Alternative Denial, Nand, Sheffer Stroke] $p{\uparrow}q$, read  ``$p$ \textit{nand} $q$"  is True if not both are True.
 \end{definition}
-
 \begin{tabular}{ |c|c|c| }
  \hline
  $p$ & $q$ &  $p{\uparrow}q$  \\
@@ -422,30 +355,7 @@ This means that whenever you come across a compound proposition $(p{\vee}q)\wedg
  \hline
 \end{tabular}  \\\\
 The word \textit{nand} does not exist in the English language, it stands for \textit{not and}. which make the liguisitic interpretation: When provided a choice between two options: you are allowed to choose none or one, but not both.\\
-The operator is named after \textbf{Henry Sheffer} who proved that Boolean algebra could be defined using a only Alternative Denial. \\
-
-The importance of Alternative Denial can not be overrated. 
-Regular programming languages do not incorporate the nand operator. 
-
-
-
-
-\begin{definition}[Converse Non implication]$p{\nleftarrow}q$, read $q$ does not imply $p$ 
-\end{definition}  
-\begin{tabular}{ |c|c|c| }
- \hline
-   $p$ & $q$ &  $p q$  \\
- \hline
- 0 & 0 & 0 \\
- 1 & 0 & 0\\
- 0 & 1 & 1\\
- 1 & 1 & 0\\
- \hline
-\end{tabular}\\\\
-
-
-
-
+The operator is named after \textbf{Henry Sheffer} who proved that Boolean algebra could be defined using a only Alternative Denial. This proof can not be overrated as it forms the basis of chips building techniques.
 
 
 \begin{definition}[Material Non Implication]$p{\nrightarrow}q$, read ``p but not q'', is True when p is True and q is False.
@@ -459,7 +369,23 @@ Regular programming languages do not incorporate the nand operator.
  0 & 1 & 0\\
  1 & 1 & 0\\
  \hline
+\end{tabular} \\\\
+$p{\nrightarrow}q$ is True as long as $p$ does not imply $q$, hence \textit{Non Implication}
+
+
+\begin{definition}[Converse Non Implication]$p{\nleftarrow}q$, read ``$q$ does not imply $p$'', is true when q is True and p is False.
+\end{definition}  
+\begin{tabular}{ |c|c|c| }
+ \hline
+   $p$ & $q$ &  $p{\nleftarrow}q$  \\
+ \hline
+ 0 & 0 & 0 \\
+ 1 & 0 & 0\\
+ 0 & 1 & 1\\
+ 1 & 1 & 0\\
+ \hline
 \end{tabular}\\\\
+As with the converse implication, there are situations where $q{ \nleftarrow}p$  is more convenient than $p{\nrightarrow}q$.
 
 
 
@@ -563,144 +489,131 @@ Although these six operators are binary in the strict sense of the word, their u
 
 
 
-As we will see in Logic Programming, there are situations where $q  \leftarrow p$  is more convenient than $ p \rightarrow q$.
+\section{Proof using Truth Tables}
+Truth tables can be used to determine the truth value of any compound proposition, as follows:
 
-
-\begin{definition}[Truth table] A truth table has one column for each input variable, and one final column showing all of the possible results of the logical operation that the table represents. Each row of the truth table contains one possible configuration of the input variables.
-\end{definition} 
-
-The truth table of negation is as follows 
-\begin{center}
-\begin{tabular}{ |c| c| }
- \hline
- p & {$\neg$}p \\
- \hline
- False & True \\ 
- True &  False \\
- \hline
-\end{tabular}
-\end{center}
-
-For reasons of brevity we replace the values False and True by 0 and 1. 0 is False, 1 is True.
-
-
-
-The truth table for any compound proposition can be constructed as follows:
 \begin{itemize}
  \item Add a column for every basic proposition 
- \item Add a final column for the compound proposition
- \item Add a row with every possible value combination of the basic propositions
- \item Fill in the final column with the result for the compound proposition
+ \item Add a column for every unary and binary operator.
+ \item Add a final column for the compound proposition 
+ \item Add a row with every possible value combination of the basic propositions, i.e. $2^n$ rows where $n$ is the number of different atomic propositions. 
 \end{itemize}
 
-\begin{example}
-For p $\vee$ q, the truth table is constructed:
 
-Add a column for every basic proposition, in this case p and q:
-\begin{center}
-\begin{tabular}{ |c| c| }
- \hline
- p & q \\
- \hline
-\end{tabular}
-\end{center}
-
-Add a final column for the compound proposition
-\begin{center}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p $\vee$ q  \\
- \hline
-\end{tabular}
-\end{center}
-
-Add a row for every possible value combination of the basic propositions:
-p has two possible values, q has two possible values 
-There are 2 x 2 different value combinations possible. 
-We add 4 rows to the table:
-
-Add a final column for the compound proposition
-\begin{center}
-\begin{tabular}{ |c|c|c| }
- \hline
- p & q &  p $\vee$ q  \\
- \hline
- 0 & 0 & \\
- 1 & 0 & \\
- 0 & 1 & \\
- 1 & 1 & \\
-
- \hline
-\end{tabular}
-\end{center}
-
-
-
-\end{example}
-
-Fill in the final column with the result for the compound proposition:
+To determine the truth value of the compound statement {$\neg$}$p${$\wedge$}$q${$\wedge$}{$\neg$}$r$, we create a truth table as follows:
+There are 3 atomic propositions: $p$, $q$, $r$. Add a column for each of them.\\
 
 \begin{center}
 \begin{tabular}{ |c|c|c| }
  \hline
- p & q &  p $\vee$ q  \\
+ p & q & r \\
  \hline
- 0 & 0 & 0\\
- 1 & 0 & 1\\
- 0 & 1 & 1\\
- 1 & 1 & 1\\
+\end{tabular}
+\end{center}
+Add a column for every unary operator, {$\neg$}p, {$\neg$}r.\\
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|}
+ \hline
+ {$\neg$} & $p$ &$q$& {$\neg$}&$r$ \\
+ \hline
+\end{tabular}
+\end{center}
+Add a column for every unary and binary operator.
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|}
+ \hline
+ {$\neg$} & $p$ &{$\wedge$}&$q$&{$\wedge$} & {$\neg$}&$r$ \\
+ \hline
+\end{tabular}
+\end{center}
+Add a column for every unary and binary operator.
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|}
+ \hline
+ {$\neg$} & $p$ &{$\wedge$}&$q$&{$\wedge$} & {$\neg$}&$r$ \\
+ \hline
+\end{tabular}
+\end{center}
+Add a row with every possible value combination of the basic proposition. \\
+For $p$: 0, 0, 0, 0, 1, 1, 1, 1\\
+For $q$: 0, 0, 1, 1, 0, 0, 1, 1\\
+For $r$: 0, 1, 0, 1, 0, 1, 0, 1\\
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c| }
+\hline
+ {$\neg$} & $p$ & {$\wedge$} & $q$ & {$\wedge$} & {$\neg$}  & $r$ \\
+\hline
+          & 0   &            & 0   &            &           &0\\
+          & 0   &            & 0   &            &           &1\\
+          & 0   &            & 1   &            &           &0\\
+          & 0   &            & 1   &            &           &1\\
+          & 1   &            & 0   &            &           &0\\
+          & 1   &            & 0   &            &           &1\\
+          & 1   &            & 1   &            &           &0\\
+          & 1   &            & 1   &            &           &1\\
  \hline
 \end{tabular}
 \end{center}
 
-Truth tables are a handy tool to determine the truth value of compound propositions. However the height of the table doubles with every basic proposition, e.g. the truth table of {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r{$\wedge$}s{$\vee$}t{$\vee$}{$\neg$}u has 32 rows.
+Fill in the truth value of the unary operators.
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c| }
+\hline
+ {$\neg$} & $p$ & {$\wedge$} & $q$ & {$\wedge$} & {$\neg$}  & $r$ \\
+\hline
+       \textbf{1}   & \st{0}   &            & 0   &            &       \textbf{1}    &\st{0}\\
+       \textbf{1}   & \st{0}   &            & 0   &            &       \textbf{0}    &\st{1}\\
+       \textbf{1}   & \st{0}   &            & 1   &            &       \textbf{1}    &\st{0}\\
+       \textbf{1}   & \st{0}   &            & 1   &            &       \textbf{0}    &\st{1}\\
+       \textbf{0}   & \st{1}   &            & 0   &            &       \textbf{1}    &\st{0}\\
+       \textbf{0}   & \st{1}   &            & 0   &            &       \textbf{0}    &\st{1}\\
+       \textbf{0}   & \st{1}   &            & 1   &            &       \textbf{1}    &\st{0}\\
+       \textbf{0}   & \st{1}   &            & 1   &            &       \textbf{0}    &\st{1}\\
+ \hline
+\end{tabular}
+\end{center}
 
+Fill in the truth values of the binary operators.\\ First, we'll fill in  {$\neg$} $p$ {$\wedge$}  $q$
 
-In order the find the value for the compound proposition, additional column can be added to the truth table, with intermediate results
-
-\begin{example}
-{$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r
 
 \begin{center}
-\begin{tabular}{ |c|c|c|c| }
-
- \hline
- p & q & r &  {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r \\
- \hline
- 0 & 0 & 0 &\\
- 1 & 0 & 0 &\\
- 0 & 1 & 0 &\\
- 1 & 1 & 0 &\\
- 0 & 0 & 1 &\\
- 1 & 0 & 1 &\\
- 0 & 1 & 1 &\\
- 1 & 1 & 1 &\\
-
+\begin{tabular}{ |c|c|c|c|c|c|c| }
+\hline
+ {$\neg$} & $p$ & {$\wedge$} & $q$ & {$\wedge$} & {$\neg$}  & $r$ \\
+\hline
+       \st{1}   & \st{0}   &  \textbf{0}          & \st{0}   &            &       \textbf{1}    &\st{0}\\
+       \st{1}   & \st{0}   &  \textbf{0}          & \st{0}   &            &       \textbf{0}    &\st{1}\\
+       \st{1}   & \st{0}   &  \textbf{1}          & \st{1}   &            &       \textbf{1}    &\st{0}\\
+       \st{1}   & \st{0}   &  \textbf{1}          & \st{1}   &            &       \textbf{0}    &\st{1}\\
+       \st{0}   & \st{1}   &  \textbf{0}          & \st{0}   &            &       \textbf{1}    &\st{0}\\
+       \st{0}   & \st{1}   &  \textbf{0}          & \st{0}   &            &       \textbf{0}    &\st{1}\\
+       \st{0}   & \st{1}   &  \textbf{0}          & \st{1}   &            &       \textbf{1}    &\st{0}\\
+       \st{0}   & \st{1}   &  \textbf{0}          & \st{1}   &            &       \textbf{0}    &\st{1}\\
  \hline
 \end{tabular}
 \end{center}
-In this table it might be useful to add an extra column for  {$\neg$}p and a column for {$\neg$}r.
+
+Secondly we'll fill in the final column, which is the result of this truth table
+{$\neg$} $p$  {$\wedge$}  $q$  {$\wedge$}  {$\neg$}   $r$ \\
 
 \begin{center}
-\begin{tabular}{ |c|c|c|c|c|c| }
-
- \hline
- p & q & r &  {$\neg$}p &{$\neg$}r & {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r \\
- \hline
- 0 & 0 & 0 & 1 & 1 &\\
- 1 & 0 & 0 & 0 & 1 &\\
- 0 & 1 & 0 & 1 & 1 &\\
- 1 & 1 & 0 & 0 & 1 &\\
- 0 & 0 & 1 & 1 & 0 &\\
- 1 & 0 & 1 & 0 & 0 &\\
- 0 & 1 & 1 & 1 & 0 &\\
- 1 & 1 & 1 & 0 & 0 &\\
+\begin{tabular}{ |c|c|c|c|c|c|c| }
+\hline
+ {$\neg$} & $p$ & {$\wedge$} & $q$ & {$\wedge$} & {$\neg$}  & $r$ \\
+\hline
+       \st{1}   & \st{0}   &  \st{0}          & \textbf{0}   &            &       \textbf{1}    &\st{0}\\
+       \st{1}   & \st{0}   &  \st{0}          & 0   &            &       \textbf{0}    &\st{1}\\
+       \st{1}   & \st{0}   &  \st{1}          & 1   &            &       \textbf{1}    &\st{0}\\
+       \st{1}   & \st{0}   &  \st{1}          & 1   &            &       \textbf{0}    &\st{1}\\
+       \st{0}   & \st{1}   &  \st{0}          & 0   &            &       \textbf{1}    &\st{0}\\
+       \st{0}   & \st{1}   &  \st{0}          & 0   &            &       \textbf{0}    &\st{1}\\
+       \st{0}   & \st{1}   &  \st{0}          & 1   &            &       \textbf{1}    &\st{0}\\
+       \st{0}   & \st{1}   &  \st{0}          & 1   &            &       \textbf{0}    &\st{1}\\
  \hline
 \end{tabular}
 \end{center}
 
-
-The compound statement is {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r True when {$\neg$}p, q, {$\neg$}r are True.
+The compound statement {$\neg$}$p${$\wedge$}$q${$\wedge$}{$\neg$}$r$ is True when {$\neg$}p, q, {$\neg$}r are True.
 
 \begin{center}
 \begin{tabular}{ |c|c|c|c|c|c| }
@@ -719,7 +632,6 @@ The compound statement is {$\neg$}p{$\wedge$}q{$\wedge$}{$\neg$}r True when {$\n
  \hline
 \end{tabular}
 \end{center}
-\end{example}
 
 
 \begin{example}
@@ -834,6 +746,30 @@ p $\vee$ q
 The logical reduction from  p $\vee$ q $\vee$ q $\vee$ p to p $\vee$ q is valid in all cases, no matter what the truth value p or q.				
 
 
+Disjunction is so widely used that is a built-in in all popular programming languages.\\
+\begin{tabular}{ |c|c| }
+\hline
+Language & or \\
+\hline
+ C      &  \textbar\textbar  \\
+ Java   & \textbar\textbar  \\
+ Python & or   \\
+ \hline
+\end{tabular}
+
+Conjunction is so widely used that is a built-in in all popular programming languages.\\
+
+\begin{tabular}{ |c|c| }
+\hline
+Language & and \\
+\hline
+ C      &  \&\& \\
+ Java   & \&\& \\
+ Python & and    \\
+ \hline
+\end{tabular}\\ \\
+These languages also have an operator \& for bitwise conjuction, we'll come to that in xxxx
+% reference 
 \begin{property}[p $\wedge$  True]  If any proposition in a disjunctive proposition is True, then the whole proposition is False. In other words: p $\vee$  True is always True.
 \end{property}
 
@@ -859,8 +795,7 @@ Language & not & and & or   \\
  \hline
 \end{tabular}
 
-
-
+Xor is important for encryption and image processing
 
 \section{Exercises}
 \index{Exercise}

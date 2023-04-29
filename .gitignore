@@ -1,0 +1,12 @@
+
+source/computational.toc
+
+source/computational.aux
+
+source/computational.idx
+
+source/computational.log
+
+*.gz
+
+*.pdf
